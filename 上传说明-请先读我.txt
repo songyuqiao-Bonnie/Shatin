@@ -1,0 +1,27 @@
+【这是上传到 GitHub 的完整文件包】
+
+把本文件夹「github-upload」里的全部内容，
+上传到你新建的空仓库根目录（不要多包一层 github-upload 文件夹名）。
+
+应包含：
+  generate_posts.py
+  shatin_weather.py
+  deepseek_utils.py
+  requirements.txt
+  README.md
+  .gitignore
+  data/state.json
+  .github/workflows/weather-content.yml
+
+不要上传：
+  output/（本地生成的文案）
+  .env 或任何 sk- 密钥
+
+GitHub 网页上传时若看不到 .gitignore：
+  用终端 git push，或按 Cmd+Shift+. 显示隐藏文件。
+
+上传后在仓库 Settings → Secrets → Actions 添加：
+  名称 DEEPSEEK_API_KEY
+  值：你的 sk- 开头密钥
+
+然后 Actions → Run workflow 试跑。

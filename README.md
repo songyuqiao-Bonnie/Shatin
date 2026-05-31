@@ -6,10 +6,22 @@
 
 ```bash
 pip install -r requirements.txt
-export DEEPSEEK_API_KEY="sk-你的密钥"   # 可选；未设置则用本地模板
+export DEEPSEEK_API_KEY="sk-你的密钥"   # 文案 AI；未设置则用本地模板
 
-python generate_posts.py
+python generate_posts.py          # 生成四平台文字
+python generate_post_images.py    # 生成配图（见下方）
 ```
+
+### 配图 `generate_post_images.py`
+
+| 方式 | 条件 | 说明 |
+|------|------|------|
+| **Pollinations**（默认） | 无需额外 Key | 免费文生图；根据沙田天气自动写英文提示词 |
+| **DeepSeek** | 已设 `DEEPSEEK_API_KEY` | 仅用于**优化**配图提示词（DeepSeek 本身不出图） |
+| **OpenAI DALL·E 3** | `OPENAI_API_KEY` + `IMAGE_PROVIDER=openai` | 画质更稳，需 OpenAI 付费额度 |
+| **Pillow 信息图** | `IMAGE_PROVIDER=pillow` 或 AI 失败时回退 | 蓝底数据卡片，无风景照 |
+
+输出：`output/images/weather_*_square.png`（IG/WhatsApp）、`weather_*_youtube.png`（YouTube）
 
 输出目录 `output/`：
 
@@ -31,9 +43,9 @@ python generate_posts.py
 
 ## GitHub Actions
 
-- 每天 **HKT 08:10** 运行 `generate_posts.py`
-- Secret：`DEEPSEEK_API_KEY`
-- 产物在 **Artifacts**；`data/state.json` 会由 bot 提交回仓库（记录首帖与去重）
+- 每天 **HKT 08:10** 自动运行：文案 + 配图
+- Secret：**只需** `DEEPSEEK_API_KEY`（配图用免费 Pollinations，不需额外 API）
+- 产物：**Artifacts** → `output/`（文字 + `images/*.png`）
 
 ## 为何以前会「七天重复」？
 
